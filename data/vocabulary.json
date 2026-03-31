@@ -1,42 +1,50 @@
-[
-    {
-        "chinese": "我",
-        "english": "I / me"
-    },
-    {
-        "chinese": "你",
-        "english": "you"
-    },
-    {
-        "chinese": "是",
-        "english": "is / are / am"
-    },
-    {
-        "chinese": "的",
-        "english": "of / possessive particle"
-    },
-    {
-        "chinese": "不",
-        "english": "not / no"
-    },
-    {
-        "chinese": "了",
-        "english": "past tense / completed action marker"
-    },
-    {
-        "chinese": "人在",
-        "english": "people at"
-    },
-    {
-        "chinese": "好",
-        "english": "good"
-    },
-    {
-        "chinese": "有",
-        "english": "have / there is"
-    },
-    {
-        "chinese": "这",
-        "english": "this"
-    }
-]
+{
+    "Core Basics": [
+        {"chinese": "我", "english": "I / me"},
+        {"chinese": "你", "english": "you"},
+        {"chinese": "是", "english": "is / are / am"},
+        {"chinese": "的", "english": "of / possessive particle"},
+        {"chinese": "不", "english": "not / no"},
+        {"chinese": "了", "english": "past tense / completed action marker"},
+        {"chinese": "人", "english": "person / people"},
+        {"chinese": "好", "english": "good"},
+        {"chinese": "有", "english": "have / there is"},
+        {"chinese": "这", "english": "this"}
+    ],
+    "Food and Drink": [
+        {"chinese": "水", "english": "water"},
+        {"chinese": "饭", "english": "rice / meal"},
+        {"chinese": "面条", "english": "noodles"},
+        {"chinese": "肉", "english": "meat"},
+        {"chinese": "茶", "english": "tea"},
+        {"chinese": "咖啡", "english": "coffee"},
+        {"chinese": "水果", "english": "fruit"},
+        {"chinese": "苹果", "english": "apple"},
+        {"chinese": "吃", "english": "to eat"},
+        {"chinese": "喝", "english": "to drink"}
+    ],
+    "Travel and Direction": [
+        {"chinese": "去", "english": "to go"},
+        {"chinese": "来", "english": "to come"},
+        {"chinese": "家", "english": "home / family"},
+        {"chinese": "车", "english": "car / vehicle"},
+        {"chinese": "路", "english": "road / path"},
+        {"chinese": "左", "english": "left"},
+        {"chinese": "右", "english": "right"},
+        {"chinese": "前", "english": "front / forward"},
+        {"chinese": "后", "english": "back / behind"},
+        {"chinese": "机场", "english": "airport"}
+    ],
+    "Numbers and Time": [
+        {"chinese": "一", "english": "one"},
+        {"chinese": "二", "english": "two"},
+        {"chinese": "三", "english": "three"},
+        {"chinese": "四", "english": "four"},
+        {"chinese": "五", "english": "five"},
+        {"chinese": "天", "english": "day"},
+        {"chinese": "年", "english": "year"},
+        {"chinese": "月", "english": "month / moon"},
+        {"chinese": "现在", "english": "now"},
+        {"chinese": "今天", "english": "today"}
+    ]
+}

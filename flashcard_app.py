@@ -6,12 +6,22 @@ class FlashcardApp:
         self.root = root
         self.manager = manager
         
+        # Performance/Visual Configuration State
+        self.themes = [
+            ("black", "white", "gray80"),       # Default AR Standard
+            ("black", "yellow", "khaki"),      # High Contrast
+            ("black", "#00ff00", "#00aa00"),   # Green/Retro Display
+            ("white", "black", "gray30")       # Inverted
+        ]
+        self.current_theme_idx = 0
+        self.bg_color, self.chinese_color, self.english_color = self.themes[0]
+        
+        # Initial Font Sizes
+        self.chinese_font_size = 250
+        self.english_font_size = 60
+        
         # Configure AR glasses optimized full-screen window
         self.root.title("Visual Chinese Learning")
-        
-        # Ensure pure black background for transparency on AR glasses
-        self.bg_color = "black"
-        self.fg_color = "white"
         self.root.configure(bg=self.bg_color)
         
         # Hide standard window decorations (title bar, borders)
@@ -23,6 +33,13 @@ class FlashcardApp:
         self.root.bind("<space>", self.next_card)
         self.root.bind("<Right>", self.next_card)
         self.root.bind("<Left>", self.previous_card)
+        
+        # Configuration Bindings
+        self.root.bind("c", self.cycle_theme)
+        self.root.bind("C", self.cycle_theme)
+        self.root.bind("<plus>", self.increase_size)
+        self.root.bind("<equal>", self.increase_size) # In case they skip shift
+        self.root.bind("<minus>", self.decrease_size)
 
         # Setup UI
         self.setup_ui()
@@ -34,28 +51,57 @@ class FlashcardApp:
         self.main_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
         # Huge Chinese Character Label
-        # Using a very large font size (e.g. 200+) helps readability on AR
         self.chinese_label = tk.Label(
             self.main_frame, 
             text="", 
-            font=("Arial", 250, "bold"), 
+            font=("Arial", self.chinese_font_size, "bold"), 
             bg=self.bg_color, 
-            fg=self.fg_color
+            fg=self.chinese_color
         )
-        self.chinese_label.pack(pady=(0, 50)) # Add some padding under the char
+        self.chinese_label.pack(pady=(0, 50))
 
         # Smaller English Translation Label
         self.english_label = tk.Label(
             self.main_frame, 
             text="", 
-            font=("Arial", 60), 
+            font=("Arial", self.english_font_size), 
             bg=self.bg_color, 
-            fg="lightgray" # Slightly dimmer than the Chinese char to maintain hierarchy
+            fg=self.english_color
         )
         self.english_label.pack()
 
+    def update_styles(self):
+        """Immediately applies font and color changes to the UI."""
+        self.root.configure(bg=self.bg_color)
+        self.main_frame.configure(bg=self.bg_color)
+        
+        self.chinese_label.config(
+            bg=self.bg_color, fg=self.chinese_color,
+            font=("Arial", self.chinese_font_size, "bold")
+        )
+        self.english_label.config(
+            bg=self.bg_color, fg=self.english_color,
+            font=("Arial", self.english_font_size)
+        )
+
+    def cycle_theme(self, event=None):
+        self.current_theme_idx = (self.current_theme_idx + 1) % len(self.themes)
+        self.bg_color, self.chinese_color, self.english_color = self.themes[self.current_theme_idx]
+        self.update_styles()
+
+    def increase_size(self, event=None):
+        self.chinese_font_size += 20
+        self.english_font_size += 5
+        self.update_styles()
+
+    def decrease_size(self, event=None):
+        if self.chinese_font_size > 50:
+            self.chinese_font_size -= 20
+            self.english_font_size -= 5
+            self.update_styles()
+
     def update_display(self):
-        \"\"\"Updates the UI with the content of the current card.\"\"\"
+        """Updates the UI with the content of the current card."""
         card = self.manager.get_current_card()
         self.chinese_label.config(text=card.get("chinese", ""))
         self.english_label.config(text=card.get("english", ""))
